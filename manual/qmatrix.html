@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The \(Q\)-matrix &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../index.html" />
+    <link rel="up" title="User Guide" href="../manual.html" />
+    <link rel="next" title="Likelihood \(L(Q)\)" href="likelihood_of_Q.html" />
+    <link rel="prev" title="User Guide" href="../manual.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>The \(Q\)-matrix</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../manual.html">User Guide</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="likelihood_of_Q.html">Likelihood <span class="math">\(L(Q)\)</span></a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-matrix">
+<span id="manual-qmatrix"></span><h1>The <span class="math">\(Q\)</span>-matrix<a class="headerlink" href="#the-matrix" title="Permalink to this headline">¶</a></h1>
+<p>The <span class="math">\(Q\)</span>-matrix represents the most basic data structure of this library. It holds the rates
+between different states in the mechanism, for open and shut states. In practice, it can be
+represented by a matrix of rates and the number of open states. As such, the initialization takes
+both of these input:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">python:</th><td class="field-body"><p class="first">The input array must be square. It can be any type that is convertible to a numpy array of reals.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="nb">sum</span><span class="p">,</span> <span class="nb">abs</span><span class="p">,</span> <span class="nb">all</span>
+<span class="kn">from</span> <span class="nn">dcprogs.likelihood</span> <span class="kn">import</span> <span class="n">QMatrix</span>
+
+<span class="n">matrix</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="o">-</span><span class="mi">3050</span><span class="p">,</span>        <span class="mi">50</span><span class="p">,</span>  <span class="mi">3000</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span> 
+           <span class="p">[</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1502.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>    <span class="mi">500</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span> 
+           <span class="p">[</span>   <span class="mi">15</span><span class="p">,</span>         <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2065</span><span class="p">,</span>     <span class="mi">50</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span> 
+           <span class="p">[</span>    <span class="mi">0</span><span class="p">,</span>     <span class="mi">15000</span><span class="p">,</span>  <span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">19000</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span> 
+           <span class="p">[</span>    <span class="mi">0</span><span class="p">,</span>         <span class="mi">0</span><span class="p">,</span>    <span class="mi">10</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>  <span class="o">-</span><span class="mi">10</span><span class="p">]</span> <span class="p">]</span>
+
+<span class="n">qmatrix</span> <span class="o">=</span> <span class="n">QMatrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+ 
+<span class="k">print</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">c++11:</th><td class="field-body"><div class="first last highlight-c++"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;typeinfo&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;likelihood/qmatrix.h&gt;</span><span class="cp"></span>
+ 
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="n">DCProgs</span><span class="o">::</span><span class="n">t_rmatrix</span> <span class="n">matrix</span><span class="p">(</span><span class="mi">5</span> <span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">matrix</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">3050</span><span class="p">,</span>        <span class="mi">50</span><span class="p">,</span>  <span class="mi">3000</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span> 
+            <span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1502.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>    <span class="mi">500</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>  
+               <span class="mi">15</span><span class="p">,</span>         <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2065</span><span class="p">,</span>     <span class="mi">50</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span>  
+                <span class="mi">0</span><span class="p">,</span>     <span class="mi">15000</span><span class="p">,</span>  <span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">19000</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>  
+                <span class="mi">0</span><span class="p">,</span>         <span class="mi">0</span><span class="p">,</span>    <span class="mi">10</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>  <span class="o">-</span><span class="mi">10</span><span class="p">;</span>
+
+  <span class="n">DCProgs</span><span class="o">::</span><span class="n">QMatrix</span> <span class="n">qmatrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="cm">/*nopen=*/</span><span class="mi">2</span><span class="p">);</span>
+ 
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">qmatrix</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+ 
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In both cases, the open-open transitions <em>must</em> be located in the top-left corner of the input
+matrix.</p>
+<p><code class="xref cpp cpp-class docutils literal"><span class="pre">QMatrix</span></code> is a structure instance, without private members. Hence both the matrix and
+number of open states can be accessed directly. In the following, we show access to <cite>nopen</cite> and to
+the rates. Among other things, the code below verifies that the rates of the CH82 model do sum to
+zero over rows (this condition is not enforced by the <code class="xref cpp cpp-class docutils literal"><span class="pre">QMatrix</span></code> object).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">python:</th><td class="field-body"><p class="first">The matrix is a numpy array. As such, it can be used within any of the efficient numerical
+algorithms provided. There are some restrictions if this package is compiled with 128 bit reals.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">nopen</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="k">assert</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">nshut</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span> <span class="o">-</span> <span class="n">matrix</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">)</span>
+
+  
+<span class="c1"># Compute sum over rows, row by row.</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">):</span> <span class="k">print</span><span class="p">(</span><span class="s2">&quot;sum(row[{0}]) = {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">row</span><span class="p">)))</span>
+
+<span class="c1"># Compute sum over rows, but let numpy do it.</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Sum over rows: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+  
+<span class="c1"># Check that sum over rows returns zero.</span>
+<span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">c++11:</th><td class="field-body"><p class="first">The matrix is an <a class="reference external" href="http://eigen.tuxfamily.org/index.php?title=Main_Page">eigen</a> array. Many linear algebra operations can be performed very efficiently
+using <a class="reference external" href="http://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a>&#8216;s interface.</p>
+<div class="last highlight-c++"><div class="highlight"><pre><span></span>  <span class="k">if</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">.</span><span class="n">nopen</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">.</span><span class="n">nshut</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span> <span class="p">((</span><span class="n">qmatrix</span><span class="p">.</span><span class="n">matrix</span> <span class="o">-</span> <span class="n">matrix</span><span class="p">).</span><span class="n">array</span><span class="p">().</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">1e-12</span><span class="p">).</span><span class="n">any</span><span class="p">()</span> <span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  
+  <span class="c1">// Compute sum over rows, row by row.</span>
+  <span class="k">for</span><span class="p">(</span><span class="n">DCProgs</span><span class="o">::</span><span class="n">t_int</span> <span class="n">i</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">qmatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">.</span><span class="n">rows</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> 
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;sum(row[&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]): &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">qmatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+  <span class="c1">// Compute sum over rows, but let eigen do it.</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Sum over rows: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">qmatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">.</span><span class="n">rowwise</span><span class="p">().</span><span class="n">sum</span><span class="p">().</span><span class="n">transpose</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  
+  <span class="c1">// Check that sum over rows returns zero.</span>
+  <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">qmatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">.</span><span class="n">rowwise</span><span class="p">().</span><span class="n">sum</span><span class="p">().</span><span class="n">array</span><span class="p">().</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">1e-10</span><span class="p">).</span><span class="n">any</span><span class="p">()</span> <span class="p">)</span> <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="p">();</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, the blocks of the  <span class="math">\(Q\)</span> can be accessed efficiently via functions (or properties in
+python). These are wrappers around the rate matrix. These wrappers are numerically efficient. They
+can and <em>should</em> be used within numerical algorithms.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">python:</th><td class="field-body"><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Gets AA block.</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;AA block:</span><span class="se">\n</span><span class="s2">---------</span><span class="se">\n</span><span class="s2">{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">aa</span><span class="p">))</span>
+                
+<span class="c1"># aa is simply wrapper around the matrix block </span>
+<span class="n">qmatrix</span><span class="o">.</span><span class="n">aa</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">42</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">c++11:</th><td class="field-body"><div class="first last highlight-c++"><div class="highlight"><pre><span></span>  <span class="c1">// Gets AA block.</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;AA block:</span><span class="se">\n</span><span class="s">---------</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">qmatrix</span><span class="p">.</span><span class="n">aa</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+                
+  <span class="c1">// aa returns a wrapper around the matrix block. Hence memory is the same.</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">.</span><span class="n">aa</span><span class="p">()(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span> <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="p">();</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../manual.html">User Guide</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="likelihood_of_Q.html">Likelihood <span class="math">\(L(Q)\)</span></a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

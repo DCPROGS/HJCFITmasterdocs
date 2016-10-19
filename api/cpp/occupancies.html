@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Occupancies &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="C++ API Reference" href="../cpp.html" />
+    <link rel="next" title="ExactSurvivor" href="exact_survivor.html" />
+    <link rel="prev" title="IdealG" href="idealG.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>Occupancies</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="idealG.html">IdealG</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="exact_survivor.html">ExactSurvivor</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="occupancies">
+<span id="cpp-occupancies-api"></span><h1>Occupancies<a class="headerlink" href="#occupancies" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="_CPPv211occupanciesR13MissedEventsGb">
+<span id="occupancies__MissedEventsGCR.b"></span>t_initvec <code class="descclassname"></code><code class="descname">occupancies</code><span class="sig-paren">(</span>MissedEventsG <em class="property">const</em> &amp;<em>_this</em>, bool <em>_initial</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv211occupanciesR13MissedEventsGb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the equilibrium occupancy equation for initial and final states</p>
+<p>The equilibrium equation is <span class="math">\(\phi = \phi M\)</span>, <span class="math">\(\sum_i [\phi]_i = 1\)</span>, where <span class="math">\(M\)</span> is
+for initial states <span class="math">\(\mathcal{G}_{AF}(s=0) \mathcal{G}_{FA}(s=0)\)</span>. The problem is solved
+using Eigen&#8217;s linear least-square utility, adding an extra row to the matrix to impose the second
+condition.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>_this</strong> &#8211; An <code class="xref cpp cpp-class docutils literal"><span class="pre">IdealG</span></code> or <code class="xref cpp cpp-class docutils literal"><span class="pre">MissedEventsG</span></code> instance.</li>
+<li><strong>bool _initial</strong> &#8211; Indicates whether to return initial (default, <code class="docutils literal"><span class="pre">true</span></code>) or final occupancies.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv215CHS_occupanciesR13MissedEventsGb">
+<span id="CHS_occupancies__MissedEventsGCR.b"></span>t_initvec <code class="descclassname"></code><code class="descname">CHS_occupancies</code><span class="sig-paren">(</span>MissedEventsG <em class="property">const</em> &amp;<em>_this</em>, bool <em>_initial</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv215CHS_occupanciesR13MissedEventsGb" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Solves the CHS occupancy equation for initial and final states</p>
+<p>For <code class="docutils literal"><span class="pre">_initial=true</span></code> this is Eq 5.11 of <a class="reference internal" href="../../index.html#colquhoun-1996" id="id1">[CHS96]</a>, whereas for
+<code class="docutils literal"><span class="pre">_initial=false</span></code>, it is Eq 5.8.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The initial and final vectors are not quite as satisfyingly symmetric as for other
+occupancies. However, to simplify the API, this function still deals with both cases.</p>
+</div>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>_this</strong> &#8211; An <code class="xref cpp cpp-class docutils literal"><span class="pre">IdealG</span></code> or <code class="xref cpp cpp-class docutils literal"><span class="pre">MissedEventsG</span></code> instance.</li>
+<li><strong>bool _initial</strong> &#8211; Indicates whether to return initial (default, <code class="docutils literal"><span class="pre">true</span></code>) or final occupancies.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="idealG.html">IdealG</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="exact_survivor.html">ExactSurvivor</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

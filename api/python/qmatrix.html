@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>QMatrix &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="Python API Reference" href="../python.html" />
+    <link rel="next" title="Log10Likelihood" href="log10likelihood.html" />
+    <link rel="prev" title="Python API Reference" href="../python.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>QMatrix</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../python.html">Python API Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="log10likelihood.html">Log10Likelihood</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="qmatrix">
+<span id="python-qmatrix-section"></span><h1>QMatrix<a class="headerlink" href="#qmatrix" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="dcprogs.likelihood.QMatrix">
+<em class="property">class </em><code class="descclassname">dcprogs.likelihood.</code><code class="descname">QMatrix</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#QMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.QMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transition rate matrix.</p>
+<p>Open-open transitions should be located in the top-left corner.</p>
+<dl class="attribute">
+<dt id="dcprogs.likelihood.QMatrix.aa">
+<code class="descname">aa</code><a class="headerlink" href="#dcprogs.likelihood.QMatrix.aa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open to open transitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.QMatrix.af">
+<code class="descname">af</code><a class="headerlink" href="#dcprogs.likelihood.QMatrix.af" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open to close transitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.QMatrix.fa">
+<code class="descname">fa</code><a class="headerlink" href="#dcprogs.likelihood.QMatrix.fa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open to close transitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.QMatrix.ff">
+<code class="descname">ff</code><a class="headerlink" href="#dcprogs.likelihood.QMatrix.ff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open to close transitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.QMatrix.matrix">
+<code class="descname">matrix</code><a class="headerlink" href="#dcprogs.likelihood.QMatrix.matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transition matrix itself.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.QMatrix.nopen">
+<code class="descname">nopen</code><a class="headerlink" href="#dcprogs.likelihood.QMatrix.nopen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of open states.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.QMatrix.nshut">
+<code class="descname">nshut</code><a class="headerlink" href="#dcprogs.likelihood.QMatrix.nshut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of shut states.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dcprogs.likelihood.QMatrix.transpose">
+<code class="descname">transpose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#QMatrix.transpose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.QMatrix.transpose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Swaps AA block with FF, AF block with FA, nopen with nshut.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../python.html">Python API Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="log10likelihood.html">Log10Likelihood</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

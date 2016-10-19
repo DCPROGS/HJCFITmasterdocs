@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python API Reference &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../index.html" />
+    <link rel="up" title="Application Programming Interface:" href="../api.html" />
+    <link rel="next" title="QMatrix" href="python/qmatrix.html" />
+    <link rel="prev" title="Searching for Roots" href="cpp/roots.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>Python API Reference</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cpp/roots.html">Searching for Roots</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="python/qmatrix.html">QMatrix</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="python-api-reference">
+<h1>Python API Reference<a class="headerlink" href="#python-api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="python/qmatrix.html">QMatrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/log10likelihood.html">Log10Likelihood</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/missed_eventsG.html">MissedEventsG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/idealG.html">IdealG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/exact_survivor.html">ExactSurvivor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/approx_survivor.html">ApproxSurvivor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/determinanteq.html">DeterminantEq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/roots.html">Searching for Roots</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python/roots.html#bracketing-all-roots">Bracketing all Roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python/roots.html#finding-intervals-for-each-root">Finding intervals for each root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python/roots.html#root-optimization">Root optimization</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="extras">
+<h2>Extras<a class="headerlink" href="#extras" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="internal-numpy-type">
+<h3>Internal Numpy Type<a class="headerlink" href="#internal-numpy-type" title="Permalink to this headline">¶</a></h3>
+<p>Many of the python bindings accept both scalars and values that can be converted to numpy arrays.
+The latter are first converted to a specific numpy type, depending on how this package was compiled.</p>
+<dl class="data">
+<dt id="dcprogs.internal_dtype">
+<code class="descclassname">dcprogs.</code><code class="descname">internal_dtype</code><a class="headerlink" href="#dcprogs.internal_dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numpy type used internally</p>
+</dd></dl>
+
+<p>If the package is configured and compiled with <code class="docutils literal"><span class="pre">-DCPROGS_LONG_DOUBLE</span></code> (see wiki), then long
+doubles of 128bits are used through out. Otherwise,  the package defaults to garden variety 64bit
+doubles.</p>
+</div>
+<div class="section" id="linear-algebra">
+<h3>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this headline">¶</a></h3>
+<p>Numpy does provides only a subset of its utilities for arrays consisting of 128 bit reals. As a
+result, this package exposes some of <a class="reference external" href="http://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen</a>&#8216;s capabilities, as needed. Their interface is generally
+reminiscent of the numpy utility they mirror.</p>
+<dl class="function">
+<dt id="dcprogs.likelihood.eig">
+<code class="descclassname">dcprogs.likelihood.</code><code class="descname">eig</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dcprogs/likelihood/likelihood.html#eig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.eig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes eigenvalues of a matrix</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dcprogs.likelihood.inv">
+<code class="descclassname">dcprogs.likelihood.</code><code class="descname">inv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dcprogs/likelihood/likelihood.html#inv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.inv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes inverse of a non-singular matrix</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dcprogs.likelihood.svd">
+<code class="descclassname">dcprogs.likelihood.</code><code class="descname">svd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#dcprogs.likelihood.svd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="dcprogs.likelihood.det">
+<code class="descclassname">dcprogs.likelihood.</code><code class="descname">det</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dcprogs/likelihood/likelihood.html#det"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.det" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes determinant of a matrix</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="dcprogs.likelihood.expm">
+<code class="descclassname">dcprogs.likelihood.</code><code class="descname">expm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/dcprogs/likelihood/likelihood.html#expm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.expm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes singular value decomposition of a matrix</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="cpp/roots.html">Searching for Roots</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="python/qmatrix.html">QMatrix</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

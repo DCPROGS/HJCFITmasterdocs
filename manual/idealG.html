@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ideal Likelihood \(\mathcal{G}(t)\) &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../index.html" />
+    <link rel="up" title="User Guide" href="../manual.html" />
+    <link rel="next" title="Occupancies" href="occupancies.html" />
+    <link rel="prev" title="Missed-Events Likelihood \({}^eG(t)\)" href="missedeventsG.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>Ideal Likelihood \(\mathcal{G}(t)\)</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="missedeventsG.html">Missed-Events Likelihood <span class="math">\({}^eG(t)\)</span></a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="occupancies.html">Occupancies</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="ideal-likelihood">
+<h1>Ideal Likelihood <span class="math">\(\mathcal{G}(t)\)</span><a class="headerlink" href="#ideal-likelihood" title="Permalink to this headline">¶</a></h1>
+<p>A wrapper around <a class="reference internal" href="../api/python/qmatrix.html#dcprogs.likelihood.QMatrix" title="dcprogs.likelihood.QMatrix"><code class="xref py py-class docutils literal"><span class="pre">QMatrix</span></code></a> is provided which allows the calculation of
+the ideal likelihood:</p>
+<div class="math">
+\[\begin{split}\mathcal{G}(t) = \left(
+\begin{eqnarray}
+   e^{-t\mathcal{Q}_{af}} &amp; 0 \\
+   0&amp; e^{-t\mathcal{Q}_{fa}} \\
+\end{eqnarray}
+\right)\end{split}\]</div>
+<p>This object can be initialized directly from a <code class="xref py py-class docutils literal"><span class="pre">QMatrix</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">python:</th><td class="field-body"><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dcprogs.likelihood</span> <span class="kn">import</span> <span class="n">QMatrix</span><span class="p">,</span> <span class="n">IdealG</span><span class="p">,</span> <span class="n">expm</span>
+
+<span class="n">qmatrix</span> <span class="o">=</span> <span class="n">QMatrix</span><span class="p">([</span> <span class="p">[</span><span class="o">-</span><span class="mi">3050</span><span class="p">,</span>        <span class="mi">50</span><span class="p">,</span>  <span class="mi">3000</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span> 
+                    <span class="p">[</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1502.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>    <span class="mi">500</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span> 
+                    <span class="p">[</span>   <span class="mi">15</span><span class="p">,</span>         <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2065</span><span class="p">,</span>     <span class="mi">50</span><span class="p">,</span> <span class="mi">2000</span><span class="p">],</span> 
+                    <span class="p">[</span>    <span class="mi">0</span><span class="p">,</span>     <span class="mi">15000</span><span class="p">,</span>  <span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">19000</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span> 
+                    <span class="p">[</span>    <span class="mi">0</span><span class="p">,</span>         <span class="mi">0</span><span class="p">,</span>    <span class="mi">10</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>  <span class="o">-</span><span class="mi">10</span><span class="p">]</span> <span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">idealG</span> <span class="o">=</span> <span class="n">IdealG</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">idealG</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">c++11:</th><td class="field-body"><div class="first last highlight-c++"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;likelihood/idealG.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;likelihood/errors.h&gt;</span><span class="cp"></span>
+ 
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">// Define parameters.</span>
+  <span class="n">DCProgs</span><span class="o">::</span><span class="n">t_rmatrix</span> <span class="n">matrix</span><span class="p">(</span><span class="mi">5</span> <span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+  <span class="n">matrix</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">3050</span><span class="p">,</span>        <span class="mi">50</span><span class="p">,</span>  <span class="mi">3000</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span> 
+            <span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1502.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>    <span class="mi">500</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>  
+               <span class="mi">15</span><span class="p">,</span>         <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2065</span><span class="p">,</span>     <span class="mi">50</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span>  
+                <span class="mi">0</span><span class="p">,</span>     <span class="mi">15000</span><span class="p">,</span>  <span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">19000</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>  
+                <span class="mi">0</span><span class="p">,</span>         <span class="mi">0</span><span class="p">,</span>    <span class="mi">10</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>  <span class="o">-</span><span class="mi">10</span><span class="p">;</span>
+  <span class="n">DCProgs</span><span class="o">::</span><span class="n">QMatrix</span> <span class="n">qmatrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="cm">/*nopen=*/</span><span class="mi">2</span><span class="p">);</span>
+
+  <span class="n">DCProgs</span><span class="o">::</span><span class="n">IdealG</span> <span class="n">idealG</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">idealG</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>It provides the ideal likelihood as a function of time, as well as the laplace transforms:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">python:</th><td class="field-body"><div class="first highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">dot</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="nb">abs</span><span class="p">,</span> <span class="nb">all</span>
+
+<span class="n">idealG_fa</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">expm</span><span class="p">(</span><span class="mf">2e-4</span> <span class="o">*</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">ff</span><span class="p">),</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">fa</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">all</span><span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">idealG_fa</span> <span class="o">-</span> <span class="n">idealG</span><span class="o">.</span><span class="n">fa</span><span class="p">(</span><span class="mf">2e-4</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-8</span> <span class="p">)</span>
+
+<span class="n">inversion</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">identity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">aa</span>
+<span class="k">assert</span> <span class="nb">all</span><span class="p">(</span> <span class="nb">abs</span><span class="p">(</span> <span class="n">dot</span><span class="p">(</span><span class="n">inversion</span><span class="p">,</span> <span class="n">idealG</span><span class="o">.</span><span class="n">laplace_af</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span> <span class="o">-</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">af</span> <span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This package can be compiled to use real number of 128bits. However, despite providing arrays
+for reals of that size, numpy does not include the corresponding linear algebra functions. A
+few useful functions, such as <code class="docutils literal"><span class="pre">expm</span></code> in this example, are provided to remediate to this
+situation.</p>
+</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">c++11:</th><td class="field-body"><div class="first last highlight-c++"><div class="highlight"><pre><span></span>  <span class="n">DCProgs</span><span class="o">::</span><span class="n">t_rmatrix</span> <span class="k">const</span> <span class="n">idealG_fa</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2e-4</span><span class="o">*</span><span class="n">qmatrix</span><span class="p">.</span><span class="n">ff</span><span class="p">()).</span><span class="n">exp</span><span class="p">()</span><span class="o">*</span><span class="n">qmatrix</span><span class="p">.</span><span class="n">fa</span><span class="p">();</span>
+  <span class="k">if</span><span class="p">(</span> <span class="p">((</span><span class="n">idealG</span><span class="p">.</span><span class="n">fa</span><span class="p">(</span><span class="mf">2e-4</span><span class="p">)</span> <span class="o">-</span> <span class="n">idealG_fa</span><span class="p">).</span><span class="n">array</span><span class="p">().</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">1e-8</span><span class="p">).</span><span class="n">any</span><span class="p">()</span> <span class="p">)</span>
+    <span class="k">throw</span> <span class="n">DCProgs</span><span class="o">::</span><span class="n">errors</span><span class="o">::</span><span class="n">Runtime</span><span class="p">(</span><span class="s">&quot;Not so ideal idealG&quot;</span><span class="p">);</span>
+
+  <span class="n">DCProgs</span><span class="o">::</span><span class="n">t_rmatrix</span> <span class="k">const</span> <span class="n">inversion</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">DCProgs</span><span class="o">::</span><span class="n">t_rmatrix</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">qmatrix</span><span class="p">.</span><span class="n">aa</span><span class="p">();</span>
+  <span class="k">if</span><span class="p">(</span> <span class="p">((</span><span class="n">inversion</span> <span class="o">*</span> <span class="n">idealG</span><span class="p">.</span><span class="n">laplace_af</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="n">qmatrix</span><span class="p">.</span><span class="n">af</span><span class="p">()).</span><span class="n">array</span><span class="p">().</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">1e-8</span><span class="p">).</span><span class="n">any</span><span class="p">()</span> <span class="p">)</span>
+    <span class="k">throw</span> <span class="n">DCProgs</span><span class="o">::</span><span class="n">errors</span><span class="o">::</span><span class="n">Runtime</span><span class="p">(</span><span class="s">&quot;Not so ideal idealG&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="missedeventsG.html">Missed-Events Likelihood <span class="math">\({}^eG(t)\)</span></a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="occupancies.html">Occupancies</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

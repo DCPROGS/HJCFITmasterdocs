@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Exceptions &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="C++ API Reference" href="../cpp.html" />
+    <link rel="next" title="QMatrix" href="qmatrix.html" />
+    <link rel="prev" title="Type Hierarchy" href="typehierarchy.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>Exceptions</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="typehierarchy.html">Type Hierarchy</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="qmatrix.html">QMatrix</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="exceptions">
+<span id="cpp-exceptions-api"></span><h1>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h1>
+<p>Exceptions are located in the file <code class="docutils literal"><span class="pre">likelihood/errors.h</span></code>.</p>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors4RootE">
+<span id="DCProgs::errors::Root"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_root"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">Root</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors4RootE" title="Permalink to this definition">¶</a></dt>
+<dd><p>All explicit DCProgs exception derive from this, for easy catching,. </p>
+<p>Inherits from std::exception</p>
+<p>Subclassed by <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_index"><span class="std std-ref">DCProgs::errors::Index</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_math"><span class="std std-ref">DCProgs::errors::Math</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_not_implemented"><span class="std std-ref">DCProgs::errors::NotImplemented</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_python"><span class="std std-ref">DCProgs::errors::Python</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_runtime"><span class="std std-ref">DCProgs::errors::Runtime</span></a></p>
+</dd></dl>
+
+<div class="section" id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors5IndexE">
+<span id="DCProgs::errors::Index"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_index"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">Index</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors5IndexE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_index"><span class="std std-ref">Index</span></a> error. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_root"><span class="std std-ref">DCProgs::errors::Root</span></a>, std::out_of_range</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors7RuntimeE">
+<span id="DCProgs::errors::Runtime"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_runtime"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">Runtime</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors7RuntimeE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_runtime"><span class="std std-ref">Runtime</span></a> error which carries a message. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_root"><span class="std std-ref">DCProgs::errors::Root</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors14NotImplementedE">
+<span id="DCProgs::errors::NotImplemented"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_not_implemented"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">NotImplemented</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors14NotImplementedE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_not_implemented"><span class="std std-ref">NotImplemented</span></a> error which carries a message. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_root"><span class="std std-ref">DCProgs::errors::Root</span></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="math">
+<h2>Math<a class="headerlink" href="#math" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors4MathE">
+<span id="DCProgs::errors::Math"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_math"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">Math</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors4MathE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_math"><span class="std std-ref">Math</span></a> (convergence, domain, etc) error. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_root"><span class="std std-ref">DCProgs::errors::Root</span></a></p>
+<p>Subclassed by <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_domain"><span class="std std-ref">DCProgs::errors::Domain</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_mass"><span class="std std-ref">DCProgs::errors::Mass</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors4MassE">
+<span id="DCProgs::errors::Mass"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_mass"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">Mass</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors4MassE" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_math"><span class="std std-ref">Math</span></a> error which carries a message. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_math"><span class="std std-ref">DCProgs::errors::Math</span></a></p>
+<p>Subclassed by <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_complex_eigenvalues"><span class="std std-ref">DCProgs::errors::ComplexEigenvalues</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_max_iterations"><span class="std std-ref">DCProgs::errors::MaxIterations</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_na_n"><span class="std std-ref">DCProgs::errors::NaN</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors18ComplexEigenvaluesE">
+<span id="DCProgs::errors::ComplexEigenvalues"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_complex_eigenvalues"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">ComplexEigenvalues</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors18ComplexEigenvaluesE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Found unexpected complex eigenvalues. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_mass"><span class="std std-ref">DCProgs::errors::Mass</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors3NaNE">
+<span id="DCProgs::errors::NaN"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_na_n"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">NaN</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors3NaNE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Found a Not a Number. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_mass"><span class="std std-ref">DCProgs::errors::Mass</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors6DomainE">
+<span id="DCProgs::errors::Domain"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_domain"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">Domain</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors6DomainE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input error to a math problem. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_math"><span class="std std-ref">DCProgs::errors::Math</span></a>, std::domain_error</p>
+<p>Subclassed by <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_not_invertible"><span class="std std-ref">DCProgs::errors::NotInvertible</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors13MaxIterationsE">
+<span id="DCProgs::errors::MaxIterations"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_max_iterations"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">MaxIterations</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors13MaxIterationsE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thrown when the maximum number of iterations is reached. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_mass"><span class="std std-ref">DCProgs::errors::Mass</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors13NotInvertibleE">
+<span id="DCProgs::errors::NotInvertible"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_not_invertible"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">NotInvertible</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors13NotInvertibleE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matrix is not invertible. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_domain"><span class="std std-ref">DCProgs::errors::Domain</span></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors6PythonE">
+<span id="DCProgs::errors::Python"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_python"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">Python</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors6PythonE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception thrown in python modules. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_root"><span class="std std-ref">DCProgs::errors::Root</span></a></p>
+<p>Subclassed by <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_python_error_already_thrown"><span class="std std-ref">DCProgs::errors::PythonErrorAlreadyThrown</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_python_type_error"><span class="std std-ref">DCProgs::errors::PythonTypeError</span></a>, <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_python_value_error"><span class="std std-ref">DCProgs::errors::PythonValueError</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors24PythonErrorAlreadyThrownE">
+<span id="DCProgs::errors::PythonErrorAlreadyThrown"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_python_error_already_thrown"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">PythonErrorAlreadyThrown</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors24PythonErrorAlreadyThrownE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception was thrown by python API. </p>
+<p>This is a convenience exception that can be thrown when a python api has set an error. It allows us to easily escape from the current scope, while keeping the python exception as it is. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_python"><span class="std std-ref">DCProgs::errors::Python</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors15PythonTypeErrorE">
+<span id="DCProgs::errors::PythonTypeError"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_python_type_error"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">PythonTypeError</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors15PythonTypeErrorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception thrown in python module when converting to C types. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_python"><span class="std std-ref">DCProgs::errors::Python</span></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv2N7DCProgs6errors16PythonValueErrorE">
+<span id="DCProgs::errors::PythonValueError"></span><span class="target" id="DCProgsclass_d_c_progs_1_1errors_1_1_python_value_error"></span><em class="property">class </em><code class="descclassname">DCProgs::errors::</code><code class="descname">PythonValueError</code><a class="headerlink" href="#_CPPv2N7DCProgs6errors16PythonValueErrorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception thrown in python module when converting to C types. </p>
+<p>Inherits from <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1errors_1_1_python"><span class="std std-ref">DCProgs::errors::Python</span></a></p>
+</dd></dl>
+
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="typehierarchy.html">Type Hierarchy</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="qmatrix.html">QMatrix</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

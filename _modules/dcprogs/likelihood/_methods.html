@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dcprogs.likelihood._methods &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>dcprogs.likelihood._methods</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        <a class="uplink" href="../../../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <h1>Source code for dcprogs.likelihood._methods</h1><div class="highlight"><pre>
+<span></span><span class="c1">#######################</span>
+<span class="c1">#   DCProgs computes missed-events likelihood as described in</span>
+<span class="c1">#   Hawkes, Jalali and Colquhoun (1990, 1992)</span>
+<span class="c1">#</span>
+<span class="c1">#   Copyright (C) 2013  University College London</span>
+<span class="c1">#</span>
+<span class="c1">#   This program is free software: you can redistribute it and/or modify</span>
+<span class="c1">#   it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1">#   (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#   This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#   GNU General Public License for more details.</span>
+<span class="c1">#########################</span>
+
+<span class="sd">&quot;&quot;&quot; Some pure python methods used to access/complement the c++ bindings. &quot;&quot;&quot;</span>
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext en&quot;</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;network&#39;</span><span class="p">,</span> <span class="s1">&#39;find_roots&#39;</span><span class="p">,</span> <span class="s1">&#39;plot_roots&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;missed_events_pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;ideal_pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;intervals_to_series&#39;</span><span class="p">,</span> <span class="s1">&#39;series_to_intervals&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;plot_time_series&#39;</span><span class="p">,</span> <span class="s1">&#39;plot_time_intervals&#39;</span> <span class="p">]</span>
+ 
+<span class="k">def</span> <span class="nf">network</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">):</span> 
+  <span class="sd">&quot;&quot;&quot; Creates networkx graph object from a :class:`QMatrix` object.</span>
+<span class="sd">  </span>
+<span class="sd">      Vertices have an &quot;open&quot; attribute to indicate whether they are open or shut. Edges have a</span>
+<span class="sd">      &quot;k+&quot; and &quot;k-&quot; attribute containing the transition rates for the node with smaller index to</span>
+<span class="sd">      the node with larger index, and vice-versa. </span>
+
+<span class="sd">      :param qmatrix: </span>
+<span class="sd">        A :class:`QMatrix` instance for which to construct a graph</span>
+<span class="sd">      :return: A `networkx.Graph` object which contains all the information held by the qmatrix</span>
+<span class="sd">               object, but in a graph format.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="kn">from</span> <span class="nn">networkx</span> <span class="k">import</span> <span class="n">Graph</span>
+
+  <span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">nopen</span><span class="p">):</span> <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">open</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">nshut</span><span class="p">):</span> <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="nb">open</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+      <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;k+&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;k-&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">qmatrix</span><span class="o">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">graph</span>
+
+<div class="viewcode-block" id="find_roots"><a class="viewcode-back" href="../../../api/python/roots.html#dcprogs.likelihood.find_roots">[docs]</a><span class="k">def</span> <span class="nf">find_roots</span><span class="p">(</span><span class="n">determinant</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+   <span class="sd">&quot;&quot;&quot; Computes roots for each interval. </span>
+<span class="sd">   </span>
+<span class="sd">       :param determinant: </span>
+<span class="sd">         A function or functor of a single variable.</span>
+
+<span class="sd">       :param intervals:</span>
+<span class="sd">         A list of items `[(a0, b0), ..., (a1, b1)]`, where `(a, b)` is the interval over which to</span>
+<span class="sd">         look for roots. </span>
+
+<span class="sd">         If this object is None (default), then uses :py:meth:`find_root_intervals` to figure out</span>
+<span class="sd">         the  intervals.</span>
+
+<span class="sd">       :param tolerance:</span>
+<span class="sd">         Tolerance criteria. Used to determine multiplicity.</span>
+
+<span class="sd">       :param kwargs:</span>
+<span class="sd">         Passed on to :py:meth:`brentq` and :py:meth:`find_root_intervals`.</span>
+
+<span class="sd">       :returns: A list of items `(root, multiplicity)`.</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">fminbound</span>
+   <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="nb">abs</span><span class="p">,</span> <span class="n">count_nonzero</span>
+   <span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">getargspec</span>
+   <span class="kn">from</span> <span class="nn">.likelihood</span> <span class="k">import</span> <span class="n">find_root_intervals</span><span class="p">,</span> <span class="n">eig</span><span class="p">,</span> <span class="n">brentq</span>
+
+   <span class="k">if</span> <span class="n">intervals</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="c1"># Create dictionary of keyword arguments</span>
+     <span class="n">names</span><span class="p">,</span> <span class="n">varargs</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">defaults</span> <span class="o">=</span> <span class="n">getargspec</span><span class="p">(</span><span class="n">find_root_intervals</span><span class="p">)</span>
+     <span class="n">intervals_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tolerance&#39;</span><span class="p">:</span> <span class="n">tolerance</span><span class="p">}</span> 
+     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">defaults</span><span class="p">):]:</span> 
+       <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span> <span class="n">intervals_kwargs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+     <span class="n">intervals</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">find_root_intervals</span><span class="p">(</span><span class="n">determinant</span><span class="p">,</span> <span class="o">**</span><span class="n">intervals_kwargs</span><span class="p">)]</span>
+
+   <span class="n">names</span><span class="p">,</span> <span class="n">varargs</span><span class="p">,</span> <span class="n">keywords</span><span class="p">,</span> <span class="n">defaults</span> <span class="o">=</span> <span class="n">getargspec</span><span class="p">(</span><span class="n">brentq</span><span class="p">)</span>
+   <span class="n">brentq_kwargs</span> <span class="o">=</span> <span class="p">{}</span> 
+   <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">defaults</span><span class="p">):]:</span> 
+     <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span> <span class="n">brentq_kwargs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+   <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+   <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
+     <span class="c1"># left, right: limit of interval.</span>
+     <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">determinant</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+     <span class="k">if</span> <span class="n">left</span> <span class="o">*</span> <span class="n">right</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">root</span> <span class="o">=</span> <span class="n">brentq</span><span class="p">(</span><span class="n">determinant</span><span class="p">,</span> <span class="o">*</span><span class="n">interval</span><span class="p">,</span> <span class="o">**</span><span class="n">brentq_kwargs</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+     <span class="k">elif</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="n">root</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">ierr</span><span class="p">,</span> <span class="n">numfunc</span> <span class="o">=</span> <span class="n">fminbound</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">determinant</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+       <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span> <span class="k">continue</span>
+     <span class="k">else</span><span class="p">:</span>
+       <span class="n">root</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">ierr</span><span class="p">,</span> <span class="n">numfunc</span> <span class="o">=</span> <span class="n">fminbound</span><span class="p">(</span><span class="n">determinant</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+       <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span> <span class="k">continue</span>
+
+     <span class="n">H</span> <span class="o">=</span> <span class="n">determinant</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="c1"># Use Eigen&#39;s eigenvalue pb so that we can do 128 bit reals. </span>
+       <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">eig</span><span class="p">(</span><span class="n">determinant</span><span class="o">.</span><span class="n">H</span><span class="p">(</span><span class="n">root</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+       <span class="n">multiplicity</span> <span class="o">=</span> <span class="n">count_nonzero</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">eigenvalues</span> <span class="o">-</span> <span class="n">root</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tolerance</span><span class="p">)</span>
+     <span class="k">else</span><span class="p">:</span> <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">1</span>
+     <span class="k">if</span> <span class="n">left</span> <span class="o">*</span> <span class="n">right</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">multiplicity</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">multiplicity</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span> <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">1</span>
+     <span class="k">else</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">multiplicity</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">multiplicity</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">multiplicity</span> <span class="o">=</span> <span class="mi">2</span>
+     <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">root</span><span class="p">,</span> <span class="n">multiplicity</span><span class="p">));</span>
+   <span class="k">return</span> <span class="n">result</span><span class="p">;</span></div>
+
+<span class="k">def</span> <span class="nf">plot_roots</span><span class="p">(</span><span class="n">determinant</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+               <span class="n">tolerance</span><span class="o">=</span><span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span> 
+   <span class="sd">&quot;&quot;&quot; Computes and plots roots. </span>
+
+<span class="sd">       :param determinant: </span>
+<span class="sd">         A function or functor of a single variable.</span>
+<span class="sd">       :param intervals:</span>
+<span class="sd">         A list of items `[(a0, b0), ..., (a1, b1)]`, where `(a, b)` is the interval over which to</span>
+<span class="sd">         look for roots. </span>
+
+<span class="sd">         If this object is None (default), then uses :py:meth:`find_root_intervals` to figure out</span>
+<span class="sd">         the  intervals.</span>
+<span class="sd">       :param main:</span>
+<span class="sd">         A dictionary of values with which to plot the determinant.</span>
+<span class="sd">       :param lines:</span>
+<span class="sd">         A dictionary of values with which to plot the roots.</span>
+<span class="sd">         </span>
+<span class="sd">       :returns: A figure</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+   <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+   <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">arange</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">array</span>
+   <span class="kn">from</span> <span class="nn">.likelihood</span> <span class="k">import</span> <span class="n">find_root_intervals</span>
+
+   <span class="k">if</span> <span class="n">intervals</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="n">intervals</span> <span class="o">=</span> <span class="p">[</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">find_root_intervals</span><span class="p">(</span><span class="n">determinant</span><span class="p">)]</span>
+   <span class="n">intervals</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span>
+   <span class="k">if</span> <span class="n">main</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">main</span> <span class="o">=</span> <span class="p">{}</span>
+   <span class="k">if</span> <span class="n">lines</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">lines</span> <span class="o">=</span> <span class="p">{}</span>
+
+   <span class="n">roots</span> <span class="o">=</span> <span class="n">find_roots</span><span class="p">(</span><span class="n">determinant</span><span class="p">,</span> <span class="n">intervals</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span>
+   <span class="n">mini</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">])</span>
+   <span class="n">maxi</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">])</span>
+   <span class="n">diff</span> <span class="o">=</span> <span class="n">maxi</span> <span class="o">-</span> <span class="n">mini</span>
+   <span class="n">maxi</span> <span class="o">+=</span> <span class="n">diff</span>  <span class="o">*</span> <span class="mf">0.05</span>
+   <span class="n">mini</span> <span class="o">-=</span> <span class="n">diff</span>  <span class="o">*</span> <span class="mf">0.05</span>
+   
+   <span class="n">x</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="n">mini</span><span class="p">,</span> <span class="n">maxi</span><span class="o">+</span><span class="p">(</span><span class="n">maxi</span><span class="o">-</span><span class="n">mini</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="p">(</span><span class="n">maxi</span><span class="o">-</span><span class="n">mini</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+   <span class="n">y</span> <span class="o">=</span> <span class="n">determinant</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+   <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+     <span class="n">figure</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+     <span class="n">ax</span> <span class="o">=</span> <span class="n">figure</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">main</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="n">mini</span><span class="p">,</span> <span class="n">maxi</span><span class="p">))</span>
+
+   <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+   <span class="n">ymin</span> <span class="o">=</span> <span class="n">ymin</span> <span class="o">-</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.05</span>
+   <span class="n">ymax</span> <span class="o">=</span> <span class="n">ymax</span> <span class="o">+</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.05</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">))</span>
+
+   <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="n">roots</span><span class="p">:</span>
+     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">ymin</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">**</span><span class="n">lines</span><span class="p">)</span>
+   <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+   <span class="k">return</span> <span class="n">figure</span>
+
+<span class="k">def</span> <span class="nf">_create_pdf</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">shut</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Creates pdf from knowledge of phi, g and whether open or shut.&quot;&quot;&quot;</span>
+  <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">dot</span><span class="p">,</span> <span class="nb">sum</span><span class="p">,</span> <span class="n">zeros_like</span>
+  <span class="k">if</span> <span class="n">shut</span><span class="p">:</span> 
+    <span class="k">def</span> <span class="nf">missed_events_pdf</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">itemset</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">fa</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">u</span><span class="p">)))))</span>
+      <span class="k">return</span> <span class="n">result</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">missed_events_pdf</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">itemset</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">af</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">u</span><span class="p">)))))</span>
+      <span class="k">return</span> <span class="n">result</span>
+  <span class="k">return</span> <span class="n">missed_events_pdf</span>
+
+<span class="k">def</span> <span class="nf">missed_events_pdf</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">nmax</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tcrit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; A function to compute missed-events pdf &quot;&quot;&quot;</span>
+  <span class="kn">from</span> <span class="nn">.likelihood</span> <span class="k">import</span> <span class="n">MissedEventsG</span>
+  <span class="n">g</span> <span class="o">=</span> <span class="n">MissedEventsG</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">nmax</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">tcrit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">final_CHS_occupancies</span><span class="p">(</span><span class="n">tcrit</span><span class="p">)</span> <span class="k">if</span> <span class="n">shut</span> <span class="k">else</span> <span class="n">g</span><span class="o">.</span><span class="n">initial_CHS_occupancies</span><span class="p">(</span><span class="n">tcrit</span><span class="p">)</span> 
+  <span class="k">else</span><span class="p">:</span> 
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">final_occupancies</span> <span class="k">if</span> <span class="n">shut</span> <span class="k">else</span> <span class="n">g</span><span class="o">.</span><span class="n">initial_occupancies</span>
+  <span class="k">return</span> <span class="n">_create_pdf</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">shut</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">ideal_pdf</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">,</span> <span class="n">shut</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; A function to compute ideal pdf &quot;&quot;&quot;</span>
+  <span class="kn">from</span> <span class="nn">.likelihood</span> <span class="k">import</span> <span class="n">IdealG</span>
+
+  <span class="n">g</span> <span class="o">=</span> <span class="n">IdealG</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">)</span>
+
+  <span class="n">phi</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">final_occupancies</span> <span class="k">if</span> <span class="n">shut</span> <span class="k">else</span> <span class="n">g</span><span class="o">.</span><span class="n">initial_occupancies</span>
+  <span class="k">return</span> <span class="n">_create_pdf</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">shut</span><span class="p">)</span>
+      
+<span class="k">def</span> <span class="nf">exponential_pdfs</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">shut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tcrit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Returns a list of function that make up the asymptotic pdf. </span>
+<span class="sd">  </span>
+<span class="sd">      This is mostly to re-plot Hawkes et al (1992).</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+  <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+  <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">dot</span><span class="p">,</span> <span class="nb">sum</span><span class="p">,</span> <span class="n">exp</span>
+  <span class="kn">from</span> <span class="nn">.likelihood</span> <span class="k">import</span> <span class="n">MissedEventsG</span><span class="p">,</span> <span class="n">ApproxSurvivor</span>
+    
+
+  <span class="n">g</span> <span class="o">=</span> <span class="n">MissedEventsG</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span> 
+  <span class="k">if</span> <span class="n">tcrit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">final_CHS_occupancies</span><span class="p">(</span><span class="n">tcrit</span><span class="p">)</span> <span class="k">if</span> <span class="n">shut</span> <span class="k">else</span> <span class="n">g</span><span class="o">.</span><span class="n">initial_CHS_occupancies</span><span class="p">(</span><span class="n">tcrit</span><span class="p">)</span> 
+  <span class="k">else</span><span class="p">:</span> 
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">final_occupancies</span> <span class="k">if</span> <span class="n">shut</span> <span class="k">else</span> <span class="n">g</span><span class="o">.</span><span class="n">initial_occupancies</span>
+
+  <span class="k">if</span> <span class="n">shut</span><span class="p">:</span> 
+    <span class="n">components</span> <span class="o">=</span> <span class="n">ApproxSurvivor</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span><span class="o">.</span><span class="n">fa_components</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">components</span> <span class="o">=</span> <span class="n">ApproxSurvivor</span><span class="p">(</span><span class="n">qmatrix</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span><span class="o">.</span><span class="n">af_components</span>
+  <span class="n">components</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+  <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">coef</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span> <span class="k">return</span> <span class="n">coef</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="n">root</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">tau</span><span class="p">))</span>
+        
+  <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">if</span> <span class="n">shut</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">root</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
+      <span class="n">coef</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">dot</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">fa_factor</span><span class="p">)))</span>
+      <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">coef</span><span class="p">,</span> <span class="n">root</span><span class="p">))</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">root</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
+      <span class="n">coef</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">dot</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">af_factor</span><span class="p">)))</span>
+      <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">coef</span><span class="p">,</span> <span class="n">root</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">results</span>
+
+<span class="k">def</span> <span class="nf">intervals_to_series</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Converts time intervals to time series. &quot;&quot;&quot;</span>
+  <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">zeros</span>
+  <span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">internal_dtype</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">internal_dtype</span><span class="p">)</span>
+  <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">start</span>
+  <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">z</span>
+  <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">series_to_intervals</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Converts time intervals to time series. &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">series</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">series</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">plot_time_series</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Plots time series &quot;&quot;&quot;</span>
+  <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">array</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">arange</span>
+  <span class="kn">from</span> <span class="nn">matplotlib.pylab</span> <span class="k">import</span> <span class="n">figure</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">series</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="n">series</span><span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">))</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">))</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_time_intervals</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Plots time intervals &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="n">plot_time_series</span><span class="p">(</span><span class="n">series_to_intervals</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">start</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+</pre></div>
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        <a class="uplink" href="../../../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

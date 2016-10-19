@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ApproxSurvivor &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="C++ API Reference" href="../cpp.html" />
+    <link rel="next" title="DeterminantEq" href="determinanteq.html" />
+    <link rel="prev" title="ExactSurvivor" href="exact_survivor.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>ApproxSurvivor</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="exact_survivor.html">ExactSurvivor</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="determinanteq.html">DeterminantEq</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="approxsurvivor">
+<span id="cpp-approx-survivor-api"></span><h1>ApproxSurvivor<a class="headerlink" href="#approxsurvivor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivorE">
+<span id="DCProgs::ApproxSurvivor"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor"></span><em class="property">class </em><code class="descclassname">DCProgs::</code><code class="descname">ApproxSurvivor</code><a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of asymptotic missed events. </p>
+<p>This object merely puts together two Asymptotes objects. </p>
+<p>Subclassed by <a class="reference internal" href="missed_eventsG.html#DCProgsclass_d_c_progs_1_1_missed_events_g"><span class="std std-ref">DCProgs::MissedEventsG</span></a></p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt>
+<span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1a41910b3d9b5e7db18d5e07500693835f"></span><em class="property">typedef </em><code class="descname">std::function&lt;std::vector&lt;Root&gt;DeterminantEq const &amp;)&gt; DCProgs::ApproxSurvivor::t_RootFinder</code></dt>
+<dd><p>Type of the function used to minimize roots. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorER13DeterminantEqRNSt6vectorI4RootEER13DeterminantEqRNSt6vectorI4RootEE">
+<span id="DCProgs::ApproxSurvivor::ApproxSurvivor__DeterminantEqCR.std::vector:Root:CR.DeterminantEqCR.std::vector:Root:CR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1abab091c3641442ce3856dc44740e493e"></span><code class="descname">ApproxSurvivor</code><span class="sig-paren">(</span><a class="reference internal" href="determinanteq.html#_CPPv2N7DCProgs13DeterminantEqE" title="DCProgs::DeterminantEq">DeterminantEq</a> <em class="property">const</em> &amp;<em>_af</em>, std::vector&lt;Root&gt; <em class="property">const</em> &amp;<em>_roots_af</em>, <a class="reference internal" href="determinanteq.html#_CPPv2N7DCProgs13DeterminantEqE" title="DCProgs::DeterminantEq">DeterminantEq</a> <em class="property">const</em> &amp;<em>_fa</em>, std::vector&lt;Root&gt; <em class="property">const</em> &amp;<em>_roots_fa</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorER13DeterminantEqRNSt6vectorI4RootEER13DeterminantEqRNSt6vectorI4RootEE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes approximate survivor functor. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_af</span></code> - <p>Determinant equation for open-&gt;shut transitions </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_roots_af</span></code> - <p>Roots of _af equation </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_fa</span></code> - <p>Determinant equation for shut-&gt;open transitions </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_roots_fa</span></code> - <p>Roots of _fa equation </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorER7QMatrix6t_realR12t_RootFinder">
+<span id="DCProgs::ApproxSurvivor::ApproxSurvivor__QMatrixCR.t_real.t_RootFinderCR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1ad3a2cb7d922f944b7bea08a9a0312a99"></span><code class="descname">ApproxSurvivor</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_matrix</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em>, t_RootFinder <em class="property">const</em> &amp;<em>_findroots</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorER7QMatrix6t_realR12t_RootFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes approx survivor functor. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_matrix</span></code> - <p>Transition matrix </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tau</span></code> - <p>resolution/max length missed events </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_findroots</span></code> - <p>A functor with which to find all roots. This function should take a <a class="reference internal" href="determinanteq.html#DCProgsclass_d_c_progs_1_1_determinant_eq"><span class="std std-ref">DeterminantEq</span></a> as its sole argument and return a std::vector&lt;DCProgs::RootInterval&gt; </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorERR14ApproxSurvivor">
+<span id="DCProgs::ApproxSurvivor::ApproxSurvivor__ApproxSurvivorRR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1a67b502f02d0a17fb8bb2c42042173f9f"></span><code class="descname">ApproxSurvivor</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorER13DeterminantEqRNSt6vectorI4RootEER13DeterminantEqRNSt6vectorI4RootEE" title="DCProgs::ApproxSurvivor::ApproxSurvivor">ApproxSurvivor</a> &amp;&amp;<em>_c</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorERR14ApproxSurvivor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorER7QMatrix6t_real6t_real6t_real6t_uint6t_real6t_real">
+<span id="DCProgs::ApproxSurvivor::ApproxSurvivor__QMatrixCR.t_real.t_real.t_real.t_uint.t_real.t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1a6ec05ef630687f163ecefaa3a1e8b86a"></span><code class="descname">ApproxSurvivor</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_qmatrix</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_xtol</em> = 1e-12, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_rtol</em> = 1e-12, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_itermax</em> = 100, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_lowerbound</em> = quiet_nan, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_upperbound</em> = quiet_nan<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor14ApproxSurvivorER7QMatrix6t_real6t_real6t_real6t_uint6t_real6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes missed-events functor. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_qmatrix</span></code> - <p>Transition matrix </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tau</span></code> - <p>resolution/max length missed events </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_xtol</span></code> - <p>Tolerance for interval size </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_rtol</span></code> - <p>Tolerance for interval size. The convergence criteria is an affine function of the root: <span class="math">\(x_{\mathrm{tol}} + r_{\mathrm{tol}} x_{\mathrm{current}} = \frac{1}{2}|x_a - x_b|\)</span>. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_itermax</span></code> - <p>maximum number of iterations for any of the three steps. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_lowerbound</span></code> - <p>Lower bound of the interval bracketing all roots. If None, the lower bound is obtained from <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1a3fc8f164f3df034c6366b45614dc4190"><span class="std std-ref">find_lower_bound_for_roots()</span></a>. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_upperbound</span></code> - <p>Upper bound of the interval bracketing all roots. If None, the upper bound is obtained from <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1a4dcf7b2325e8c290ad6bc863a3629334"><span class="std std-ref">find_upper_bound_for_roots()</span></a>. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor2afE6t_real">
+<span id="DCProgs::ApproxSurvivor::af__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1ad24748396af8e0e8a59958c64c45ef1f"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">af</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor2afE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open to close transitions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor2faE6t_real">
+<span id="DCProgs::ApproxSurvivor::fa__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1a2c7665cdf5a96837d02b5b8f02fcb38e"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">fa</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor2faE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close to open transitions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor16nb_af_componentsEv">
+<span id="DCProgs::ApproxSurvivor::nb_af_components"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1a106e4031fb8a1d2c86b67a0c5e069398"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <code class="descname">nb_af_components</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor16nb_af_componentsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of exponential components for af. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor16nb_fa_componentsEv">
+<span id="DCProgs::ApproxSurvivor::nb_fa_components"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1a2bdd0e716d02646148f5c79e4f68ec8a"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <code class="descname">nb_fa_components</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor16nb_fa_componentsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of exponential components for fa. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor17get_af_componentsE5t_int">
+<span id="DCProgs::ApproxSurvivor::get_af_components__t_int"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1ac87d2f5ae2857669d85ed54942028d46"></span>Asymptotes::t_MatrixAndRoot <em class="property">const</em> &amp;<code class="descname">get_af_components</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs5t_intE" title="DCProgs::t_int">t_int</a> <em>i</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor17get_af_componentsE5t_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>AF exponential components. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs14ApproxSurvivor17get_fa_componentsE5t_int">
+<span id="DCProgs::ApproxSurvivor::get_fa_components__t_int"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_approx_survivor_1a1e30b1c095a52082dd96661f8ac2deba"></span>Asymptotes::t_MatrixAndRoot <em class="property">const</em> &amp;<code class="descname">get_fa_components</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs5t_intE" title="DCProgs::t_int">t_int</a> <em>i</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs14ApproxSurvivor17get_fa_componentsE5t_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>FA exponential components. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="exact_survivor.html">ExactSurvivor</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="determinanteq.html">DeterminantEq</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

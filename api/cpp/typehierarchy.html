@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Type Hierarchy &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="C++ API Reference" href="../cpp.html" />
+    <link rel="next" title="Exceptions" href="exceptions.html" />
+    <link rel="prev" title="C++ API Reference" href="../cpp.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>Type Hierarchy</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../cpp.html">C++ API Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="exceptions.html">Exceptions</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="type-hierarchy">
+<h1>Type Hierarchy<a class="headerlink" href="#type-hierarchy" title="Permalink to this headline">¶</a></h1>
+<p>It is often convenient to express all types in a software from a few starting points. This is called
+a type hierarchy. The advantage is that it is then fairly easy to switch, say, from using <cite>double</cite> to
+<cite>long double</cite>. Indeed, doing so takes all of one line in this package, as can be seen in the file
+<code class="file docutils literal"><span class="pre">DCProgsConfig.h.in</span></code> at the root of the package. We describe below the type hierarchy of the
+package. All the types are prefixed with <code class="docutils literal"><span class="pre">t_</span></code> to indicate that it is a type. Where instructive, the
+names of more complex types will start with <code class="docutils literal"><span class="pre">i</span></code>, <code class="docutils literal"><span class="pre">r</span></code>, <code class="docutils literal"><span class="pre">c</span></code>, <code class="docutils literal"><span class="pre">b</span></code> for integer, real, complex,
+and bool.</p>
+<div class="section" id="basic-types">
+<h2>Basic types<a class="headerlink" href="#basic-types" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="_CPPv2N7DCProgs6t_realE">
+<span id="DCProgs::t_real"></span><span class="target" id="DCProgsnamespace_d_c_progs_1a9e619b9e081ffa4f5260e8931e894585"></span><em class="property">typedef </em>double <code class="descclassname">DCProgs::</code><code class="descname">t_real</code><a class="headerlink" href="#_CPPv2N7DCProgs6t_realE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Types of reals across DCProgs. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs5t_intE">
+<span id="DCProgs::t_int"></span><span class="target" id="DCProgsnamespace_d_c_progs_1af5016dba5792114ec2b78607776283f3"></span><em class="property">typedef </em>EIGEN_DEFAULT_DENSE_INDEX_TYPE <code class="descclassname">DCProgs::</code><code class="descname">t_int</code><a class="headerlink" href="#_CPPv2N7DCProgs5t_intE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Types of integers across DCProgs. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs6t_uintE">
+<span id="DCProgs::t_uint"></span><span class="target" id="DCProgsnamespace_d_c_progs_1aaad801e4e17919b8e1d2b8fef04743ed"></span><em class="property">typedef </em>std::make_unsigned&lt;<a class="reference internal" href="#_CPPv2N7DCProgs5t_intE" title="DCProgs::t_int">t_int</a>&gt;::type <code class="descclassname">DCProgs::</code><code class="descname">t_uint</code><a class="headerlink" href="#_CPPv2N7DCProgs6t_uintE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Types of unsigned integers across DCProgs. </p>
+</dd></dl>
+
+</div>
+<div class="section" id="eigen-math-types">
+<h2>Eigen/Math types<a class="headerlink" href="#eigen-math-types" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="_CPPv2N7DCProgs9t_complexE">
+<span id="DCProgs::t_complex"></span><span class="target" id="DCProgsnamespace_d_c_progs_1ad9ca886ba206308baf2234fc2c10ebb4"></span><em class="property">typedef </em>std::complex&lt;<a class="reference internal" href="#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a>&gt; <code class="descclassname">DCProgs::</code><code class="descname">t_complex</code><a class="headerlink" href="#_CPPv2N7DCProgs9t_complexE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Complex real type. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs9t_rvectorE">
+<span id="DCProgs::t_rvector"></span><span class="target" id="DCProgsnamespace_d_c_progs_1a25a673fd5aa7e07bc0b77cb388b061a1"></span><em class="property">typedef </em>Eigen::Matrix&lt;<a class="reference internal" href="#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a>, Eigen::Dynamic, 1&gt; <code class="descclassname">DCProgs::</code><code class="descname">t_rvector</code><a class="headerlink" href="#_CPPv2N7DCProgs9t_rvectorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Types of final state vectors across DCProgs. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs9t_initvecE">
+<span id="DCProgs::t_initvec"></span><span class="target" id="DCProgsnamespace_d_c_progs_1a117dc6a879328169274275929b8a0417"></span><em class="property">typedef </em>Eigen::Matrix&lt;<a class="reference internal" href="#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a>, 1, Eigen::Dynamic&gt; <code class="descclassname">DCProgs::</code><code class="descname">t_initvec</code><a class="headerlink" href="#_CPPv2N7DCProgs9t_initvecE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Types of initial state vectors across DCProgs. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs9t_bmatrixE">
+<span id="DCProgs::t_bmatrix"></span><span class="target" id="DCProgsnamespace_d_c_progs_1a76a03daceeb04f0c2b21e09d6515f19a"></span><em class="property">typedef </em>Eigen::Matrix&lt;bool, Eigen::Dynamic, Eigen::Dynamic&gt; <code class="descclassname">DCProgs::</code><code class="descname">t_bmatrix</code><a class="headerlink" href="#_CPPv2N7DCProgs9t_bmatrixE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Types of boolean matrices across DCProgs. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs9t_rmatrixE">
+<span id="DCProgs::t_rmatrix"></span><span class="target" id="DCProgsnamespace_d_c_progs_1a25cfdd50785b8c3adb0c2358a398724c"></span><em class="property">typedef </em>Eigen::Matrix&lt;<a class="reference internal" href="#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a>, Eigen::Dynamic, Eigen::Dynamic&gt; <code class="descclassname">DCProgs::</code><code class="descname">t_rmatrix</code><a class="headerlink" href="#_CPPv2N7DCProgs9t_rmatrixE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Types of real matrices across DCProgs. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs9t_cmatrixE">
+<span id="DCProgs::t_cmatrix"></span><span class="target" id="DCProgsnamespace_d_c_progs_1a7e2cc8f7f04fb33d572b84dbcca0969e"></span><em class="property">typedef </em>Eigen::Matrix&lt;<a class="reference internal" href="#_CPPv2N7DCProgs9t_complexE" title="DCProgs::t_complex">t_complex</a>, Eigen::Dynamic, Eigen::Dynamic&gt; <code class="descclassname">DCProgs::</code><code class="descname">t_cmatrix</code><a class="headerlink" href="#_CPPv2N7DCProgs9t_cmatrixE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of complex matrices. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs8t_BurstsE">
+<span id="DCProgs::t_Bursts"></span><span class="target" id="DCProgsnamespace_d_c_progs_1a21587f54465c508c5a0a2bea7abad1f8"></span><em class="property">typedef </em>std::vector&lt;<a class="reference internal" href="#_CPPv2N7DCProgs7t_BurstE" title="DCProgs::t_Burst">t_Burst</a>&gt; <code class="descclassname">DCProgs::</code><code class="descname">t_Bursts</code><a class="headerlink" href="#_CPPv2N7DCProgs8t_BurstsE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type holding the bursts. </p>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv2N7DCProgs7t_BurstE">
+<span id="DCProgs::t_Burst"></span><span class="target" id="DCProgsnamespace_d_c_progs_1af4a2e9c4a58a67c5d312ee4a32950550"></span><em class="property">typedef </em>std::vector&lt;<a class="reference internal" href="#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a>&gt; <code class="descclassname">DCProgs::</code><code class="descname">t_Burst</code><a class="headerlink" href="#_CPPv2N7DCProgs7t_BurstE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of a burst. </p>
+</dd></dl>
+
+</div>
+<div class="section" id="global-data">
+<h2>Global Data<a class="headerlink" href="#global-data" title="Permalink to this headline">¶</a></h2>
+<dl class="var">
+<dt id="c.DCProgs::quiet_nan">
+<code class="descclassname">DCProgs::</code><code class="descname">quiet_nan</code><a class="headerlink" href="#c.DCProgs::quiet_nan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds an alias to <cite>NaN</cite> representation in <a class="reference internal" href="#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real"><code class="xref cpp cpp-type docutils literal"><span class="pre">DCProgs::t_real</span></code></a>. The code will fail to
+compile if <cite>NaN</cite> cannot be represented in this type.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="../cpp.html">C++ API Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="exceptions.html">Exceptions</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

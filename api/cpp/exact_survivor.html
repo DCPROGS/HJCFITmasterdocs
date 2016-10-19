@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ExactSurvivor &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="C++ API Reference" href="../cpp.html" />
+    <link rel="next" title="ApproxSurvivor" href="approx_survivor.html" />
+    <link rel="prev" title="Occupancies" href="occupancies.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>ExactSurvivor</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="occupancies.html">Occupancies</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="approx_survivor.html">ApproxSurvivor</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="exactsurvivor">
+<span id="cpp-exact-survivor-api"></span><h1>ExactSurvivor<a class="headerlink" href="#exactsurvivor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs13ExactSurvivorE">
+<span id="DCProgs::ExactSurvivor"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor"></span><em class="property">class </em><code class="descclassname">DCProgs::</code><code class="descname">ExactSurvivor</code><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivorE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of recursion for exact missed-event survivor function. </p>
+<p>Implements the exact-missed event probability calculations, as detailed in Hawkes, Jalali, and Colquhoun (1990). Specifically, this is equation 3.2. </p>
+<p>Subclassed by <a class="reference internal" href="missed_eventsG.html#DCProgsclass_d_c_progs_1_1_missed_events_g"><span class="std std-ref">DCProgs::MissedEventsG</span></a></p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor13ExactSurvivorER7QMatrix6t_real">
+<span id="DCProgs::ExactSurvivor::ExactSurvivor__QMatrixCR.t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1aa8ab1e5745edd7d6efd53031fa0240d5"></span><code class="descname">ExactSurvivor</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_qmatrix</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor13ExactSurvivorER7QMatrix6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes exact survivor functor. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_qmatrix</span></code> - <p>Partitioned matrix with open states in top left corner. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tau</span></code> - <p>Missed event cutoff time. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<em class="property">template </em>&lt;<em class="property">class</em> T&gt;</dt>
+<dt id="_CPPv2N7DCProgs13ExactSurvivor13ExactSurvivorERN5Eigen9DenseBaseI1TEE6t_uint6t_real">
+<span id="DCProgs::ExactSurvivor::ExactSurvivor__Eigen::DenseBase:T:CR.t_uint.t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a348647baa5a2b722b7b30833795c1dae"></span><code class="descname">ExactSurvivor</code><span class="sig-paren">(</span>Eigen::DenseBase&lt;T&gt; <em class="property">const</em> &amp;<em>_qmatrix</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_nopen</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor13ExactSurvivorERN5Eigen9DenseBaseI1TEE6t_uint6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes exact survivor functor. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_qmatrix</span></code> - <p>A transition matrix with open states in top left corner </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_nopen</span></code> - <p>Number of open states. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tau</span></code> - <p>Missed event cutoff time. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor13ExactSurvivorERR13ExactSurvivor">
+<span id="DCProgs::ExactSurvivor::ExactSurvivor__ExactSurvivorRR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a0058031019c56a6ee1f2aeddf4746e7b"></span><code class="descname">ExactSurvivor</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N7DCProgs13ExactSurvivor13ExactSurvivorER7QMatrix6t_real" title="DCProgs::ExactSurvivor::ExactSurvivor">ExactSurvivor</a> &amp;&amp;<em>_c</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor13ExactSurvivorERR13ExactSurvivor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor3setER7QMatrix6t_real">
+<span id="DCProgs::ExactSurvivor::set__QMatrixCR.t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a03d9cc5719403a30cadf182932019fdd"></span>void <code class="descname">set</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_qmatrix</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor3setER7QMatrix6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the values for which to compute exact g. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor2afE6t_real">
+<span id="DCProgs::ExactSurvivor::af__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a4bb413c72734772a776d84a68ea86ecb"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">af</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor2afE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Probability of no shut times detected between 0 and t. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor2faE6t_real">
+<span id="DCProgs::ExactSurvivor::fa__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a6c29ffe02fb5993707ddec22b4894811"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">fa</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor2faE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Probability of no open times detected between 0 and t. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor7get_tauEv">
+<span id="DCProgs::ExactSurvivor::get_tau"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a66bb01f10025da144a35b32908abb949"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">get_tau</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor7get_tauEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the value of tau;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor12recursion_afE6t_uint6t_uint6t_uint">
+<span id="DCProgs::ExactSurvivor::recursion_af__t_uint.t_uint.t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1ad53998e5d96c0da80b850c56227839f5"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">recursion_af</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_i</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_m</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_l</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor12recursion_afE6t_uint6t_uint6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns recursion matrix for af. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor12recursion_faE6t_uint6t_uint6t_uint">
+<span id="DCProgs::ExactSurvivor::recursion_fa__t_uint.t_uint.t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1adb0419c3715b67059443bd10b09422a8"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">recursion_fa</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_i</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_m</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_l</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor12recursion_faE6t_uint6t_uint6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns recursion matrix for af. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor4D_afE6t_uint">
+<span id="DCProgs::ExactSurvivor::D_af__t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a4fb0715c6fe36cfc51ebc71e31cc63cb"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">D_af</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_i</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor4D_afE6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Di matrix for af. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor4D_faE6t_uint">
+<span id="DCProgs::ExactSurvivor::D_fa__t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a22f251309f02b05df839027f72b6c6e1"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">D_fa</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_i</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor4D_faE6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns Di matrix for af. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor14eigenvalues_afEv">
+<span id="DCProgs::ExactSurvivor::eigenvalues_af"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a4e205bc5bfd7441cba7b1e61a27e24fc"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rvectorE" title="DCProgs::t_rvector">t_rvector</a> <code class="descname">eigenvalues_af</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor14eigenvalues_afEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns eigenvalues for af matrix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor14eigenvalues_faEv">
+<span id="DCProgs::ExactSurvivor::eigenvalues_fa"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1ae42571895bd1e04240188be4a84f1910"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rvectorE" title="DCProgs::t_rvector">t_rvector</a> <code class="descname">eigenvalues_fa</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor14eigenvalues_faEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns eigenvalues for fa matrix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivoraSERR13ExactSurvivor">
+<span id="DCProgs::ExactSurvivor::assign-operator__ExactSurvivorRR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1a4b2847ccf8593f4866faa181aff6924d"></span><a class="reference internal" href="#_CPPv2N7DCProgs13ExactSurvivorE" title="DCProgs::ExactSurvivor">ExactSurvivor</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N7DCProgs13ExactSurvivorE" title="DCProgs::ExactSurvivor">ExactSurvivor</a> &amp;&amp;<em>_c</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivoraSERR13ExactSurvivor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move assignment. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor18RecursionInterfaceE">
+<span id="DCProgs::ExactSurvivor::RecursionInterface"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface"></span><em class="property">class </em><code class="descname">RecursionInterface</code><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterfaceE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of recursion for exact missed-event Survivor function. </p>
+<p>This is an interface to the function recursion_formula. In practice, this object needs not be called directly. Rather the public interface (which is about computing the likelihood for an event of duration t) is in the containing class <a class="reference internal" href="#DCProgsclass_d_c_progs_1_1_exact_survivor"><span class="std std-ref">ExactSurvivor</span></a>. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface9t_elementE">
+<span id="DCProgs::ExactSurvivor::RecursionInterface::t_element"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface_1ab8f1c11eed3cb05184ab6a2297f0426c"></span><em class="property">typedef </em><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">t_element</code><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface9t_elementE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Element on which to perform recursion. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface18RecursionInterfaceER7QMatrix6t_realb">
+<span id="DCProgs::ExactSurvivor::RecursionInterface::RecursionInterface__QMatrixCR.t_real.b"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface_1a27b54ace27b72d8da8a6077fc759ad24"></span><code class="descname">RecursionInterface</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_qmatrix</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em>, bool <em>_doAF</em> = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface18RecursionInterfaceER7QMatrix6t_realb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_qmatrix</span></code> - <p>The transition state matrix for which to compute <span class="math">\(^eR_{AF}(t\rightarrow\infty)\)</span> </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tau</span></code> - <p>Maximum length of missed events </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_doAF</span></code> - <p>Whether to do AF (true) or FA </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor18RecursionInterfaceclE6t_uint6t_uint6t_uint">
+<span id="DCProgs::ExactSurvivor::RecursionInterface::call-operator__t_uint.t_uint.t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface_1a26e9773441ec13e2d6b745f618271051"></span><a class="reference internal" href="#_CPPv2N7DCProgs13ExactSurvivorE" title="DCProgs::ExactSurvivor">ExactSurvivor</a>::<a class="reference internal" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterfaceE" title="DCProgs::ExactSurvivor::RecursionInterface">RecursionInterface</a>::<a class="reference internal" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface9t_elementE" title="DCProgs::ExactSurvivor::RecursionInterface::t_element">t_element</a> <code class="descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_i</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_m</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_l</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterfaceclE6t_uint6t_uint6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursion element i, m, l. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface4getDE6t_uint">
+<span id="DCProgs::ExactSurvivor::RecursionInterface::getD__t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface_1aa6b2f7ed75f4e3d086dd40347d23309f"></span><a class="reference internal" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface9t_elementE" title="DCProgs::ExactSurvivor::RecursionInterface::t_element">t_element</a> <em class="property">const</em> &amp;<code class="descname">getD</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_i</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface4getDE6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns D values. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface11get_eigvalsE6t_uint">
+<span id="DCProgs::ExactSurvivor::RecursionInterface::get_eigvals__t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface_1a1bed942bc6978df70045172d9fe39ba7"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">get_eigvals</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_i</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface11get_eigvalsE6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns i <span class="math">\(^{th}\)</span> eigenvalue. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface9nbeigvalsEv">
+<span id="DCProgs::ExactSurvivor::RecursionInterface::nbeigvals"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface_1a36dc2c1f36ec8214a065b5520b43630e"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <code class="descname">nbeigvals</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface9nbeigvalsEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of eigenvalues. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface11eigenvaluesEv">
+<span id="DCProgs::ExactSurvivor::RecursionInterface::eigenvalues"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface_1adbe693ac9edba6c6566059f6c6a9ff95"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rvectorE" title="DCProgs::t_rvector">t_rvector</a> <em class="property">const</em> &amp;<code class="descname">eigenvalues</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13ExactSurvivor18RecursionInterface11eigenvaluesEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference to eigenvalues. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="DCProgsclass_d_c_progs_1_1_exact_survivor_1_1_recursion_interface_1a8f38c00ea09e847e98761ef74c1889fa"></span><code class="descname">decltype(t_rmatrix::Zero(1,1)) DCProgs::ExactSurvivor::RecursionInterface::zero()</code> const</dt>
+<dd><p>A null matrix of appropriate size. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="occupancies.html">Occupancies</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="approx_survivor.html">ApproxSurvivor</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

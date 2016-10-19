@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Log10Likelihood &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="C++ API Reference" href="../cpp.html" />
+    <link rel="next" title="MissedEventsG" href="missed_eventsG.html" />
+    <link rel="prev" title="QMatrix" href="qmatrix.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>Log10Likelihood</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="qmatrix.html">QMatrix</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="missed_eventsG.html">MissedEventsG</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="log10likelihood">
+<span id="cpp-log10-section"></span><h1>Log10Likelihood<a class="headerlink" href="#log10likelihood" title="Permalink to this headline">¶</a></h1>
+<p>The purpose of this class is to provide an interface for maximizing the likelihood. It computes,
+for a given set of observed open and shut intervals, the likelihood <span class="math">\(\frac{\ln(L(Q))}{ln 10}\)</span>,
+where <span class="math">\(L(Q)\)</span> is declared in <a class="reference internal" href="../../manual.html#log10likelihood-equation"><span class="std std-ref">the likelihood equation</span></a>.</p>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs15Log10LikelihoodE">
+<span id="DCProgs::Log10Likelihood"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood"></span><em class="property">class </em><code class="descclassname">DCProgs::</code><code class="descname">Log10Likelihood</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10LikelihoodE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Likelihood of a set of bursts. </p>
+<p>This functor takes as input a Q-matrix and returns the likelihood for a given set of bursts. It is, in practice, a convenience object with which to perform likelihood optimization.</p>
+<p>At each call, it creates a likelihood object <a class="reference internal" href="missed_eventsG.html#DCProgsclass_d_c_progs_1_1_missed_events_g"><span class="std std-ref">MissedEventsG</span></a> using the input parameters given during initialization, and the Q-matrix given on input. It then returns the log10 likelihood for the set of bursts given on input. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood15Log10LikelihoodER8t_Bursts6t_uint6t_real6t_real6t_uint6t_real6t_real6t_uint6t_real6t_real">
+<span id="DCProgs::Log10Likelihood::Log10Likelihood__t_BurstsCR.t_uint.t_real.t_real.t_uint.t_real.t_real.t_uint.t_real.t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a1006fd2b1937c309d8726b27e8c1c834"></span><code class="descname">Log10Likelihood</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs8t_BurstsE" title="DCProgs::t_Bursts">t_Bursts</a> <em class="property">const</em> &amp;<em>_bursts</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_nopen</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tcritical</em> = -1e0, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_nmax</em> = 2, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_xtol</em> = 1e-10, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_rtol</em> = 1e-10, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_itermax</em> = 100, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_lowerbound</em> = quiet_nan, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_upperbound</em> = quiet_nan<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood15Log10LikelihoodER8t_Bursts6t_uint6t_real6t_real6t_uint6t_real6t_real6t_uint6t_real6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_bursts</span></code> - <p>A vector of bursts. Each burst is a vector of intervals, starting with an open interval. The intervals should be prefiltered for the maximum missed-event length. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_nopen</span></code> - <p>Number of open states. The open states must be in the top left corner of the Q-matrix. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tau</span></code> - <p>Maximum length of the missed events </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tcritical</span></code> - <p>Parameter for CHS vectors (see [2]) if positive. If negative, then equilibrium occupancies will be used as initial and final states (as in [1]) </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_nmax</span></code> - <p>The exact missed-event likelihood will be computed for <span class="math">\( t &lt; n_{\mathrm{max}} \tau\)</span> </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_xtol</span></code> - <p>Tolerance criteria for <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1af13aff14f1014d7404f29aece242f5fa"><span class="std std-ref">brentq()</span></a>. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_rtol</span></code> - <p>Tolerance criteria for <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1af13aff14f1014d7404f29aece242f5fa"><span class="std std-ref">brentq()</span></a>. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_itermax</span></code> - <p>Maximum number of iteration when calling <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1af13aff14f1014d7404f29aece242f5fa"><span class="std std-ref">brentq()</span></a>. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_lowerbound</span></code> - <p>Lower bound of the interval bracketing all roots. If None, the lower bound is obtained from <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1a3fc8f164f3df034c6366b45614dc4190"><span class="std std-ref">find_lower_bound_for_roots()</span></a>. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_upperbound</span></code> - <p>Upper bound of the interval bracketing all roots. If None, the upper bound is obtained from <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1a4dcf7b2325e8c290ad6bc863a3629334"><span class="std std-ref">find_upper_bound_for_roots()</span></a>. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood6vectorER9t_rmatrix">
+<span id="DCProgs::Log10Likelihood::vector__t_rmatrixCR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a8d56dc5dd0349acf7f65cd1a8ec68eef"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rvectorE" title="DCProgs::t_rvector">t_rvector</a> <code class="descname">vector</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <em class="property">const</em> &amp;<em>_Q</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood6vectorER9t_rmatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes likelihood for each burst. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>a <a class="reference internal" href="typehierarchy.html#DCProgsnamespace_d_c_progs_1a25a673fd5aa7e07bc0b77cb388b061a1"><span class="std std-ref">DCProgs::t_rvector</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood6vectorER7QMatrix">
+<span id="DCProgs::Log10Likelihood::vector__QMatrixCR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1aec767533fae7a9333d09721f61be9e24"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rvectorE" title="DCProgs::t_rvector">t_rvector</a> <code class="descname">vector</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_Q</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood6vectorER7QMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes likelihood for each burst. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>a <a class="reference internal" href="typehierarchy.html#DCProgsnamespace_d_c_progs_1a25a673fd5aa7e07bc0b77cb388b061a1"><span class="std std-ref">DCProgs::t_rvector</span></a> </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs15Log10LikelihoodclER9t_rmatrix">
+<span id="DCProgs::Log10Likelihood::call-operator__t_rmatrixCR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a4e11cc869ad11aa126baf675ecff26b1"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <em class="property">const</em> &amp;<em>_Q</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs15Log10LikelihoodclER9t_rmatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log-likelihood. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs15Log10LikelihoodclER7QMatrix">
+<span id="DCProgs::Log10Likelihood::call-operator__QMatrixCR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a0f48e2bfbd0a16d8a8aaa877ce5926a3"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_Q</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs15Log10LikelihoodclER7QMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log-likelihood. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood6burstsE">
+<span id="DCProgs::Log10Likelihood::bursts__t_Bursts"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a2d9f100beb3fb8c9121bac8783d3b089"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs8t_BurstsE" title="DCProgs::t_Bursts">t_Bursts</a> <code class="descname">bursts</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood6burstsE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set of bursts for which to compute the likelihood. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood5nopenE">
+<span id="DCProgs::Log10Likelihood::nopen__t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1aebc6457b6507bed73d87a35bce74ba6f"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <code class="descname">nopen</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood5nopenE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of open states. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood3tauE">
+<span id="DCProgs::Log10Likelihood::tau__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1ae2d750b9646153d39eb2c70023e39e42"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">tau</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood3tauE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max length of missed events. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood9tcriticalE">
+<span id="DCProgs::Log10Likelihood::tcritical__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a181b13d2d805c7a11e5a2e18b301d151"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">tcritical</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood9tcriticalE" title="Permalink to this definition">¶</a></dt>
+<dd><p><span class="math">\(t_{\mathrm{crit}}\)</span>. </p>
+<p>If negative or null, will use equilibrium occupancies rather than CHS occupancies. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood4nmaxE">
+<span id="DCProgs::Log10Likelihood::nmax__t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a539e3b62b77fcdff041131017c3f1879"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <code class="descname">nmax</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood4nmaxE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of intervals for which to compute exact result. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood4xtolE">
+<span id="DCProgs::Log10Likelihood::xtol__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1ab231f43ba5bc690f0f15d47819ef8159"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">xtol</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood4xtolE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tolerance for root finding. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood4rtolE">
+<span id="DCProgs::Log10Likelihood::rtol__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a4726fac364136ef150dc445683739e08"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">rtol</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood4rtolE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tolerance for root finding. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood7itermaxE">
+<span id="DCProgs::Log10Likelihood::itermax__t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1a165ed3604baf1695471dfbe751d50143"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <code class="descname">itermax</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood7itermaxE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of iterations for root finding. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood11lower_boundE">
+<span id="DCProgs::Log10Likelihood::lower_bound__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1ababf67497ab84cab8943c288f43d8897"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">lower_bound</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood11lower_boundE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lower bound bracketing all roots. </p>
+</dd></dl>
+
+<dl class="member">
+<dt id="_CPPv2N7DCProgs15Log10Likelihood11upper_boundE">
+<span id="DCProgs::Log10Likelihood::upper_bound__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_log10_likelihood_1afd3e55108d938f1a8c7bb88566ed9c4d"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">upper_bound</code><a class="headerlink" href="#_CPPv2N7DCProgs15Log10Likelihood11upper_boundE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upper bound bracketing all roots. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="qmatrix.html">QMatrix</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="missed_eventsG.html">MissedEventsG</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MissedEventsG &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="C++ API Reference" href="../cpp.html" />
+    <link rel="next" title="IdealG" href="idealG.html" />
+    <link rel="prev" title="Log10Likelihood" href="log10likelihood.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>MissedEventsG</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="log10likelihood.html">Log10Likelihood</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="idealG.html">IdealG</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="missedeventsg">
+<span id="cpp-eg-api"></span><h1>MissedEventsG<a class="headerlink" href="#missedeventsg" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="_CPPv2N7DCProgs13MissedEventsGE">
+<span id="DCProgs::MissedEventsG"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g"></span><em class="property">class </em><code class="descclassname">DCProgs::</code><code class="descname">MissedEventsG</code><a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsGE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of recursion for exact missed-event G function. </p>
+<p>Implements the exact-missed event probability calculations, as detailed in Hawkes, Jalali, and Colquhoun (1990). Specifically, this is equation 3.2. </p>
+<p>Inherits from <a class="reference internal" href="exact_survivor.html#DCProgsclass_d_c_progs_1_1_exact_survivor"><span class="std std-ref">DCProgs::ExactSurvivor</span></a>, <a class="reference internal" href="approx_survivor.html#DCProgsclass_d_c_progs_1_1_approx_survivor"><span class="std std-ref">DCProgs::ApproxSurvivor</span></a></p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG13MissedEventsGER13DeterminantEqRNSt6vectorI4RootEER13DeterminantEqRNSt6vectorI4RootEE6t_uint">
+<span id="DCProgs::MissedEventsG::MissedEventsG__DeterminantEqCR.std::vector:Root:CR.DeterminantEqCR.std::vector:Root:CR.t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a1284cdb7ae74c12b73530cd33513e6d3"></span><code class="descname">MissedEventsG</code><span class="sig-paren">(</span><a class="reference internal" href="determinanteq.html#_CPPv2N7DCProgs13DeterminantEqE" title="DCProgs::DeterminantEq">DeterminantEq</a> <em class="property">const</em> &amp;<em>_af</em>, std::vector&lt;Root&gt; <em class="property">const</em> &amp;<em>_roots_af</em>, <a class="reference internal" href="determinanteq.html#_CPPv2N7DCProgs13DeterminantEqE" title="DCProgs::DeterminantEq">DeterminantEq</a> <em class="property">const</em> &amp;<em>_fa</em>, std::vector&lt;Root&gt; <em class="property">const</em> &amp;<em>_roots_fa</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_nmax</em> = 3<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG13MissedEventsGER13DeterminantEqRNSt6vectorI4RootEER13DeterminantEqRNSt6vectorI4RootEE6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes missed events G functor. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_af</span></code> - <p>Determinant equation for af. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_fa</span></code> - <p>Determinant equation for af. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_roots_af</span></code> - <p>Roots of determinant equation for af </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_roots_fa</span></code> - <p>Roots of determinant equation for fa </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_nmax</span></code> - <p>Switches to asymptotic values after <span class="math">\(t\geq n_{\mathrm{max}}\tau\)</span> </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG13MissedEventsGER7QMatrix6t_realR12t_RootFinder6t_uint">
+<span id="DCProgs::MissedEventsG::MissedEventsG__QMatrixCR.t_real.t_RootFinderCR.t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a55bf3a95809e0b5cf32e9ca4bbc3749c"></span><code class="descname">MissedEventsG</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_qmatrix</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em>, t_RootFinder <em class="property">const</em> &amp;<em>_findroots</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_nmax</em> = 3<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG13MissedEventsGER7QMatrix6t_realR12t_RootFinder6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes missed events functor. </p>
+<p>Uses input root finding function to determine roots. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_qmatrix</span></code> - <p>Transition matrix </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tau</span></code> - <p>resolution/max length missed events </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_findroots</span></code> - <p>A functor with which to find all roots. This function should take a <a class="reference internal" href="determinanteq.html#DCProgsclass_d_c_progs_1_1_determinant_eq"><span class="std std-ref">DeterminantEq</span></a> as its sole argument and return a std::vector&lt;DCProgs::RootInterval&gt; </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_nmax</span></code> - <p>Switches to asymptotic values after <span class="math">\(t\geq n_{\mathrm{max}}\tau\)</span> </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG13MissedEventsGER7QMatrix6t_real6t_uint6t_real6t_real6t_uint6t_real6t_real">
+<span id="DCProgs::MissedEventsG::MissedEventsG__QMatrixCR.t_real.t_uint.t_real.t_real.t_uint.t_real.t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a443b59b104df2f2f68d88cf6b2dcfec3"></span><code class="descname">MissedEventsG</code><span class="sig-paren">(</span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<em>_qmatrix</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_tau</em>, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_nmax</em> = 3, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_xtol</em> = 1e-12, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_rtol</em> = 1e-12, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_itermax</em> = 100, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_lowerbound</em> = quiet_nan, <a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_upperbound</em> = quiet_nan<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG13MissedEventsGER7QMatrix6t_real6t_uint6t_real6t_real6t_uint6t_real6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes missed-events functor. </p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal"><span class="pre">_qmatrix</span></code> - <p>Transition matrix </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_tau</span></code> - <p>resolution/max length missed events </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_nmax</span></code> - <p>Switches to asymptotic values after <span class="math">\(t\geq n_{\mathrm{max}}\tau\)</span> </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_xtol</span></code> - <p>Tolerance for interval size </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_rtol</span></code> - <p>Tolerance for interval size. The convergence criteria is an affine function of the root: <span class="math">\(x_{\mathrm{tol}} + r_{\mathrm{tol}} x_{\mathrm{current}} = \frac{1}{2}|x_a - x_b|\)</span>. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_itermax</span></code> - <p>maximum number of iterations for any of the three steps. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_lowerbound</span></code> - <p>Lower bound of the interval bracketing all roots. If None, the lower bound is obtained from <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1a3fc8f164f3df034c6366b45614dc4190"><span class="std std-ref">find_lower_bound_for_roots()</span></a>. </p>
+</li>
+<li><code class="first docutils literal"><span class="pre">_upperbound</span></code> - <p>Upper bound of the interval bracketing all roots. If None, the upper bound is obtained from <a class="reference internal" href="roots.html#DCProgsnamespace_d_c_progs_1a4dcf7b2325e8c290ad6bc863a3629334"><span class="std std-ref">find_upper_bound_for_roots()</span></a>. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG13MissedEventsGERR13MissedEventsG">
+<span id="DCProgs::MissedEventsG::MissedEventsG__MissedEventsGRR"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a13775539b09da02c85801ab7f50769bf"></span><code class="descname">MissedEventsG</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv2N7DCProgs13MissedEventsG13MissedEventsGER13DeterminantEqRNSt6vectorI4RootEER13DeterminantEqRNSt6vectorI4RootEE6t_uint" title="DCProgs::MissedEventsG::MissedEventsG">MissedEventsG</a> &amp;&amp;<em>_c</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG13MissedEventsGERR13MissedEventsG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG2afE6t_real">
+<span id="DCProgs::MissedEventsG::af__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1aa9c4f4b5a855c51735ca52cdb58cb71b"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">af</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG2afE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open to close transitions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG2faE6t_real">
+<span id="DCProgs::MissedEventsG::fa__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1ae8e0325ccc1a1ef7c813d4b4754548a5"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">fa</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG2faE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close to open transitions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG11survivor_afE6t_real">
+<span id="DCProgs::MissedEventsG::survivor_af__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a64c041695483b31adaa490b55a72dd20"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">survivor_af</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG11survivor_afE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Probability of no shut times detected between 0 and t. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG11survivor_faE6t_real">
+<span id="DCProgs::MissedEventsG::survivor_fa__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a731650e11a404062a1c06d9f1194cd7e"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">survivor_fa</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_t</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG11survivor_faE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Probability of no open times detected between 0 and t. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG8set_nmaxE6t_uint">
+<span id="DCProgs::MissedEventsG::set_nmax__t_uint"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a9ae2e2c2f0a2ede711d1d7849df14bbe"></span>void <code class="descname">set_nmax</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <em>_n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG8set_nmaxE6t_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets <span class="math">\(t\geq n_{\mathrm{max}}\tau\)</span>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG8get_nmaxEv">
+<span id="DCProgs::MissedEventsG::get_nmax"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1ab39902d686b48e7247e8b51ed0fd5ef8"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_uintE" title="DCProgs::t_uint">t_uint</a> <code class="descname">get_nmax</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG8get_nmaxEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>When to switch to asymptotic values. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG7get_tauEv">
+<span id="DCProgs::MissedEventsG::get_tau"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1ad89dd0bf6d858ee0609fb5cfd69ee8bf"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">get_tau</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG7get_tauEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the value of missed event resolution;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG8get_tmaxEv">
+<span id="DCProgs::MissedEventsG::get_tmax"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a1cf4f692b19a1c86a199ca08b833136f"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <code class="descname">get_tmax</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG8get_tmaxEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><span class="math">\(t_{\mathrm{max}}\)</span> is the time after which approximate calculations are performed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG13get_af_factorEv">
+<span id="DCProgs::MissedEventsG::get_af_factor"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a226f8e8612fc70c32b540d1b399d5837"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <em class="property">const</em> &amp;<code class="descname">get_af_factor</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG13get_af_factorEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><span class="math">\(Q_{AF}e^{-Q_{FF}\tau} \)</span> </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG13get_fa_factorEv">
+<span id="DCProgs::MissedEventsG::get_fa_factor"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a25468fe50aa146cab8319dafe2b1954c"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <em class="property">const</em> &amp;<code class="descname">get_fa_factor</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG13get_fa_factorEv" title="Permalink to this definition">¶</a></dt>
+<dd><p><span class="math">\(Q_{FA}e^{-Q_{AA}\tau} \)</span> </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG10laplace_afE6t_real">
+<span id="DCProgs::MissedEventsG::laplace_af__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1a89bd1000ef44b0fb7c480aed11740559"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">laplace_af</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_s</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG10laplace_afE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exact laplace of AF. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG10laplace_faE6t_real">
+<span id="DCProgs::MissedEventsG::laplace_fa__t_real"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1ac5bf07a992403a4430d4c81e3e1482fb"></span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs9t_rmatrixE" title="DCProgs::t_rmatrix">t_rmatrix</a> <code class="descname">laplace_fa</code><span class="sig-paren">(</span><a class="reference internal" href="typehierarchy.html#_CPPv2N7DCProgs6t_realE" title="DCProgs::t_real">t_real</a> <em>_s</em><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG10laplace_faE6t_real" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exact laplace of FA. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv2N7DCProgs13MissedEventsG11get_qmatrixEv">
+<span id="DCProgs::MissedEventsG::get_qmatrix"></span><span class="target" id="DCProgsclass_d_c_progs_1_1_missed_events_g_1ae8810f25e82c227954f4c4fd018bb4dc"></span><a class="reference internal" href="qmatrix.html#_CPPv2N7DCProgs7QMatrixE" title="DCProgs::QMatrix">QMatrix</a> <em class="property">const</em> &amp;<code class="descname">get_qmatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const<a class="headerlink" href="#_CPPv2N7DCProgs13MissedEventsG11get_qmatrixEv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns current <a class="reference internal" href="qmatrix.html#DCProgsstruct_d_c_progs_1_1_q_matrix"><span class="std std-ref">QMatrix</span></a>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="log10likelihood.html">Log10Likelihood</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="idealG.html">IdealG</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

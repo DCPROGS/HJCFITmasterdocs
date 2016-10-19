@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MissedEventsG &#8212; DCProgs 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="DCProgs 0.9 documentation" href="../../index.html" />
+    <link rel="up" title="Python API Reference" href="../python.html" />
+    <link rel="next" title="IdealG" href="idealG.html" />
+    <link rel="prev" title="Log10Likelihood" href="log10likelihood.html" /> 
+  </head>
+  <body role="document">
+      <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
+          <span>DCProgs 0.9 documentation</span></a></h1>
+        <h2 class="heading"><span>MissedEventsG</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="log10likelihood.html">Log10Likelihood</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="idealG.html">IdealG</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="missedeventsg">
+<span id="python-eg-api"></span><h1>MissedEventsG<a class="headerlink" href="#missedeventsg" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="dcprogs.likelihood.MissedEventsG">
+<em class="property">class </em><code class="descclassname">dcprogs.likelihood.</code><code class="descname">MissedEventsG</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#MissedEventsG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes missed-events likelihood.</p>
+<p>Exact calculations take place for times smaller than <span class="math">\(n_{\mathrm{max}}\tau\)</span>. Asymptotic calculations take over for larger times.</p>
+<dl class="method">
+<dt id="dcprogs.likelihood.MissedEventsG.af">
+<code class="descname">af</code><span class="sig-paren">(</span><em>self</em>, <em>t</em><span class="sig-paren">)</span> &rarr; DCProgs::t_rmatrix<a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#MissedEventsG.af"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.af" title="Permalink to this definition">¶</a></dt>
+<dd><p>Likelihood of an observed open time of length <code class="docutils literal"><span class="pre">t</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> &#8211; A scalar or something to a numpy array. In the latter case, the return is an array
+of matrices.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.af_factor">
+<code class="descname">af_factor</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.af_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor accounting for minimum shut time</p>
+<p>It is the likelihood <span class="math">\(\mathcal{Q}_{AF}e^{-\mathcal{Q}_{FF}\tau}\)</span> of a shut
+time of length <span class="math">\(\tau\)</span>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dcprogs.likelihood.MissedEventsG.fa">
+<code class="descname">fa</code><span class="sig-paren">(</span><em>self</em>, <em>t</em><span class="sig-paren">)</span> &rarr; DCProgs::t_rmatrix<a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#MissedEventsG.fa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.fa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Likelihood of a shut time of length <code class="docutils literal"><span class="pre">t</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>t</strong> &#8211; A scalar or something to a numpy array. In the latter case, the return is an array
+of matrices.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.fa_factor">
+<code class="descname">fa_factor</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.fa_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Factor accounting for minimum open time</p>
+<p>It is the likelihood <span class="math">\(\mathcal{Q}_{FA}e^{-\mathcal{Q}_{AA}\tau}\)</span> of an open
+time of length <span class="math">\(\tau\)</span>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dcprogs.likelihood.MissedEventsG.final_CHS_occupancies">
+<code class="descname">final_CHS_occupancies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#MissedEventsG.final_CHS_occupancies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.final_CHS_occupancies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes final CHS occupancies.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.final_occupancies">
+<code class="descname">final_occupancies</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.final_occupancies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equilibrium occupancies for final states.</p>
+<p>Computes the right eigenvector of <span class="math">\({}^e\mathcal{G}_{FA}{}^e\mathcal{G}_{AF}\)</span>, 
+where <span class="math">\({}^e\mathcal{G}_{FA}\)</span> is the laplacian for <span class="math">\(s=0\)</span> of the likelihood.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dcprogs.likelihood.MissedEventsG.initial_CHS_occupancies">
+<code class="descname">initial_CHS_occupancies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#MissedEventsG.initial_CHS_occupancies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.initial_CHS_occupancies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes initial CHS occupancies.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.initial_occupancies">
+<code class="descname">initial_occupancies</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.initial_occupancies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equilibrium occupancies for initial states.</p>
+<p>Computes the left eigenvector of <span class="math">\({}^e\mathcal{G}_{AF}{}^e\mathcal{G}_{FA}\)</span>, 
+where <span class="math">\({}^e\mathcal{G}_{AF}\)</span> is the laplacian for <span class="math">\(s=0\)</span> of the likelihood.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="dcprogs.likelihood.MissedEventsG.laplace_af">
+<code class="descname">laplace_af</code><span class="sig-paren">(</span><em>self</em>, <em>s</em><span class="sig-paren">)</span> &rarr; DCProgs::t_rmatrix<a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#MissedEventsG.laplace_af"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.laplace_af" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exact missed-events G in Laplace space.</p>
+<p>The exact expression is <span class="math">\(^{e}\mathcal{G}_{AF}(s) = {}^AR(s) e^{-s\tau}\mathcal{Q}_{AF}e^{\mathcal{Q}_{FF}\tau}\)</span>, with <span class="math">\({}^AR(s) = [sI - \mathcal{Q}_{AA} - \mathcal{Q}_{AF} \int_0^\tau e^{-st}e^{\mathcal{Q}_{FF}t}\partial t \mathcal{Q}_{FA}]^{-1}\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> &#8211; The laplace scale. A real scalar or something convertible to a numpy array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A matrix if the input is scalar, an array of matrices otherwise, 
+with the shape of the input.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="dcprogs.likelihood.MissedEventsG.laplace_fa">
+<code class="descname">laplace_fa</code><span class="sig-paren">(</span><em>self</em>, <em>s</em><span class="sig-paren">)</span> &rarr; DCProgs::t_rmatrix<a class="reference internal" href="../../_modules/dcprogs/likelihood/likelihood.html#MissedEventsG.laplace_fa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.laplace_fa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exact missed-events G in Laplace space.</p>
+<p>The exact expression is <span class="math">\(^{e}\mathcal{G}_{FA}(s) = {}^FR(s) e^{-s\tau}\mathcal{Q}_{FA}e^{\mathcal{Q}_{AA}\tau}\)</span>, with <span class="math">\({}^FR(s) = [sI - \mathcal{Q}_{FF} - \mathcal{Q}_{FA} \int_0^\tau e^{-st}e^{\mathcal{Q}_{AA}t}\partial t \mathcal{Q}_{AF}]^{-1}\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>s</strong> &#8211; The laplace scale. A real scalar or something convertible to a numpy array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A matrix if the input is scalar, an array of matrices otherwise, 
+with the shape of the input.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.nmax">
+<code class="descname">nmax</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.nmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cut-off time of exact calculations in units of <span class="math">\(\\tau\)</span>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.nopen">
+<code class="descname">nopen</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.nopen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of open-states.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.nshut">
+<code class="descname">nshut</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.nshut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of shut-states.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.tau">
+<code class="descname">tau</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.tau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolution or maximum length of the missed events.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="dcprogs.likelihood.MissedEventsG.tmax">
+<code class="descname">tmax</code><a class="headerlink" href="#dcprogs.likelihood.MissedEventsG.tmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cut-off time of exact calculations <span class="math">\(t_{\mathrm{max}} = (n_{\mathrm{max}}-1)\\tau\)</span>.</p>
+<p>For practical reasons, the minimum observation time has alreadybeen removed here.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="log10likelihood.html">Log10Likelihood</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="idealG.html">IdealG</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2013-2016, University College London.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>
